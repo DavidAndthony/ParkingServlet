@@ -1,7 +1,13 @@
 package com.zubiri.jsps.servlets;
-
-import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.IOException;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -63,5 +69,26 @@ public class addCoche extends HttpServlet {
 		//ParkingVehiculos parking = new ParkingVehiculos(sc);
 		
 	}
+	 static public void añadirCoche(){
+		 FileWriter fichero = null;
+	        PrintWriter pw = null;
+	        try
+	        {
+	            fichero = new FileWriter("coches.txt", true);
+	            pw = new PrintWriter(fichero);
+
+	                pw.println(Vehiculo.getMatricula()+","+Vehiculo.getMarca()+","+Vehiculo.getNumRuedas());
+	 
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	           try {
+	           if (null != fichero)
+	              fichero.close();
+	           } catch (Exception e2) {
+	              e2.printStackTrace();
+	           }
+	        }
+	 }
 
 }

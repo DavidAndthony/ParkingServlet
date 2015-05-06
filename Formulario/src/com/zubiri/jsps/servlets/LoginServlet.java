@@ -45,7 +45,6 @@ public class LoginServlet extends HttpServlet {
 		//parkin.añadirCoche();
 		parking.verCoches();
 		
-		
 		PrintWriter out = response.getWriter();
 		out.println("<html>");
 		out.println("<body>");

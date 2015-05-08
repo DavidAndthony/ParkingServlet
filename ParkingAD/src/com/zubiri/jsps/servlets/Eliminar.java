@@ -13,15 +13,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Buscar
+ * Servlet implementation class Eliminar
  */
-public class Buscar extends HttpServlet {
+public class Eliminar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Buscar() {
+    public Eliminar() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,7 +45,7 @@ try{
 			
 			//int numRuedas = Integer.parseInt(request.getParameter("nr").trim());
 			//String marca = request.getParameter("marc");	
-		//	String matricula = request.getParameter("matri");
+			String matricula = request.getParameter("matriculaE");
 			
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			System.out.println("Connecting to database...");
@@ -53,21 +53,22 @@ try{
 			System.out.println("Connecting to parking...");
 			Statement sentencia = conexion.createStatement();
 			System.out.println("sentencia creada");
-		
+
+			String borrar = 
+					"DELETE FROM parking3 WHERE matricula = '"+matricula+"';";
 			
-			
-			
-		ResultSet coche = sentencia.executeQuery("SELECT * FROM parking3 WHERE matricula = '"+request.getParameter("matriculab")+"';"); 
+			sentencia.execute(borrar);
+			/*
+		ResultSet coche = sentencia.executeQuery("DELETE FROM parking3 WHERE matricula = '"+request.getParameter("matriculaE")+"';"); 
 		coche.next();
 		
-		
-		
-		
+		*/
 		out.println("<html>");
 		out.println("<head><title>Respuesta</title>");
 		out.println("<body>");
 		out.println("<h1>almacenamiento del parking</h1>");
-		out.println("<p>si se encuentra el coche con la matricula : " + coche.getString("matricula")  + "</p>");
+		//out.println("<p>se ha eliminado el coche con la matricula : " + coche.getString("matriculaE")  + "</p>");
+		out.println("<p>se ha eliminado el coche con la matricula : " + matricula  + "</p>");
 		out.println("</body></html>");
 		
 		
@@ -77,8 +78,6 @@ try{
 		}catch(Exception e){
 			
 		}
-		
-		
 	}
 
 }
